@@ -1,0 +1,191 @@
+﻿用户相关
+
+注册 
+url: /user/register
+method: POST
+客户端发送一个对象
+uid：学号，唯一
+pw：密码
+name: 姓名
+email:
+phone:
+如成功，后台返回空对象，否则返回失败原因
+
+登录
+url: /user/login
+method: POST
+客户端发送一个对象
+uid
+pw:密码
+如成功，后台返回需要的信息（应该就是整个个人注册信息），否则返回失败原因
+
+查询自己借的书
+url: /user/borrow
+method: POST
+客户端发送
+{
+     rdate:  // 最后的那个书的_id
+     length: 5  // 每页显示个数
+}
+如成功，后台返回同下
+
+查询自己发布的书
+url: /user/publish
+method: POST
+客户端发送一个对象
+{
+     id:  // 最后的那个书的_id
+     length: 5  // 每页显示个数
+}
+
+服务器回传的参数需为: [], // 表格数据
+
+如成功，后台返回对象数组，否则返回失败原因
+
+{
+名称 title
+发布时间 stime
+owner
+reader
+应还日期rdate
+分类 type 1教科书 2小说 3科学书 4工具书 5其他书
+类型 flag 1送 2借 4both
+借出日期 ldate
+图片位置 path
+续借标志 renewflag  0未续借 1已续借
+处理中状态以rdate为-1表示吧……
+}
+
+查询电话
+url: /user/phone
+method: POST
+客户端发送一个对象{uid: _id}
+如成功，后台返回数组{phone:电话}
+
+修改密码
+url: /user/changePw
+method: POST
+客户端发送一个对象{oldPw: 旧密码,newPw: 新密码}
+如成功，后台返回空对象{}
+
+租借情况
+url: /user/count
+method: POST
+客户端发送一个空对象
+后台返回对象{
+borrow 借的书
+lend 借出的书
+publish 发布的书
+maxNum 最大可借的数量
+}
+
+
+主页书籍信息
+url: /book/queryByTime
+method:GET
+客户端发送空对象
+如成功，后台返回需要的信息（name），否则返回失败原因
+
+书本相关
+查找
+url: /book/query
+method: POST
+客户端发送对象
+{title: XX
+type:XX
+
+}
+返回书籍的资料
+
+添加新书
+url:/book/addBook
+method:POST
+客户端发送一个对象
+名称 title
+分类 type 
+类型 flag 1送 2借 4both
+照片 photo
+如成功，后台返回空对象，否则返回失败原因
+
+删除书
+url:/book/deleteBook
+method:POST
+客户端发送一个对象
+书本的id
+如成功，后台返回空对象，否则返回失败原因
+
+修改书
+url:/book/changeBook
+method:POST
+客户端发送一个对象
+书本的id
+type
+flag
+如成功，后台返回空对象，否则返回失败原因
+
+借书
+url:/book/borrow
+method:POST
+客户端发送一个对象
+书的id
+如成功，后台返回空对象，否则返回失败原因
+
+续借
+url:/book/renew
+method:POST
+客户端发送一个对象
+书的id
+如成功，后台返回空对象，否则返回失败原因
+
+还书
+url:/book/return
+method:POST
+客户端发送一个对象
+书的id
+如成功，后台返回空对象，否则返回失败原因
+
+送书(读者)
+
+url:/book/get
+method:POST
+客户端发送一个对象
+书的id
+如成功，后台返回空对象，否则返回失败原因
+
+
+送书
+url:/book/send
+method:POST
+客户端发送一个对象
+书的id
+如成功，后台返回空对象，否则返回失败原因
+
+
+message相关
+url:/user/addMessage
+method:POST
+客户端发送一个对象
+              {
+                    receiver:'',
+                    content:''
+                }
+如成功，后台返回空对象，否则返回失败原因
+
+
+message相关
+url:/user/searchMessage
+method:POST
+客户端发送一个对象
+              {
+                    id:''(可无),
+                    length:''
+                }
+如成功，后台返回数组[
+{
+ralation
+comments:{
+poster
+content
+}
+}
+]，否则返回失败原因
